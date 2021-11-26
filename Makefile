@@ -15,13 +15,18 @@ RM = rm -f
 %.o : %.c
 		$(CC) -o $@ -c $< $(CFLAGS)
 $(NAME) 	:	$(OBJ)
+		$(MAKE) -C ./libft
+		cp libft/libft.a $(NAME)
 		$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(MLX)
+
 all : $(NAME)
 
 clean :
+		$(MAKE) clean -C ./libft
 		$(RM) $(OBJ)
 
 fclean : clean
+		$(MAKE) fclean -C ./libft
 		$(RM) $(NAME)
 
 re : fclean all

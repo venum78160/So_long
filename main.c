@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 18:34:07 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/11/25 16:52:04 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2021/11/26 11:22:40 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,25 +65,26 @@ int	main(void)
 
 	x = -1;
 	ml.mlx = mlx_init();
-	ml.mlx_win = mlx_new_window(ml.mlx, 500, 500, "Hello world!");
-	ml.st_img.img = mlx_new_image(ml.mlx, 500, 500);
+	ml.mlx_win = mlx_new_window(ml.mlx, 700, 700, "Hello world!");
+	ml.st_img.img = mlx_new_image(ml.mlx, 700, 700);
 	ml.st_img.addr = mlx_get_data_addr(ml.st_img.img, &ml.st_img.bits_per_pixel, &ml.st_img.line_length,
 								&ml.st_img.endian);
-	while (++x <= 500)
+	while (++x <= 700)
 	{
 		y = -1;
-		while (++y <= 50)
+		while (++y <= 126)
 			my_mlx_pixel_put(&ml.st_img, x, y, 0x00FF0000);
 	}
 	mlx_put_image_to_window(ml.mlx, ml.mlx_win, ml.st_img.img, 0, 0);
 	x = -1;
-	while (++x <= 500)
+	while (++x <= 700)
 	{
-		y = 449;
-		while (++y <= 500)
+		y = 574;
+		while (++y <= 700)
 			my_mlx_pixel_put(&ml.st_img, x, y, 0x000000FF);
 	}
 	mlx_put_image_to_window(ml.mlx, ml.mlx_win, ml.st_img.img, 0, 0);
+	mlx_string_put(ml.mlx, ml.mlx_win, 200, 200, 0x00FFFFFF, "salut");
 	mlx_key_hook(ml.mlx_win, key_hook, &ml);
 	printf("salut\n");
 	mlx_loop(ml.mlx);
