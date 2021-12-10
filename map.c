@@ -6,13 +6,13 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 19:34:57 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/11/30 17:45:33 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2021/12/08 16:09:18 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	make_tab(t_info *info)
+void	make_tab(t_info *i)
 {
 	int		fd;
 	int		comp;
@@ -20,43 +20,37 @@ void	make_tab(t_info *info)
 
 	comp = 0;
 	n = -1;
-	fd = ft_open("maps.ber");
+	fd = ft_open(i->map.name_fichier);
 	while (get_next_line(fd) != NULL)
 		comp++;
-	info->map.map_height = comp;
+	i->map.map_height = comp;
 	close(fd);
-	info->map.map_width = m_test_rect("maps.ber", comp);
-	m_verif_map(info, "maps.ber", comp);
-	fd = open("maps.ber", O_RDONLY);
-	info->map.map_s = calloc(1, (info->map.map_height + 1));
+	i->map.map_width = m_test_rect(i->map.name_fichier, comp);
+	m_verif_map(i, i->map.name_fichier, comp);
+	fd = open(i->map.name_fichier, O_RDONLY);
+	i->map.map_s = calloc(sizeof(char *), (i->map.map_height + 1));
 	while (--comp >= 0)
-	{
-		info->map.map_s[++n] = calloc(1, (info->map.map_width + 1));
-		info->map.map_s[n] = get_next_line(fd);
-		printf("valeur maps %i = %s\n", n, info->map.map_s[n]);
-	}
-	m_nbr_ennemi(info);
-	m_ft_ferme(*info);
-	printf("fin\n");
+		i->map.map_s[++n] = get_next_line(fd);
+	m_nbr_ennemi(i);
+	m_ft_ferme(i);
 	return ;
 }
 
-void	m_nbr_ennemi(t_info *info)
+void	m_nbr_ennemi(t_info *i)
 {
 	int	n;
-	int	i;
+	int	j;
 
 	n = -1;
-	info->map.nbr_ennemi = 0;
-	while (++n < info->map.map_height)
+	i->map.nbr_ennemi = 0;
+	while (++n < i->map.map_height)
 	{
-		i = -1;
-		while (++i < info->map.map_width)
+		j = -1;
+		while (++j < i->map.map_width)
 		{
-			if (info->map.map_s[n][i] == 'D')
-				info->map.nbr_ennemi++;
+			if (i->map.map_s[n][j] == 'D')
+				i->map.nbr_ennemi++;
 		}
 	}
-	info->ennemi = calloc(sizeof(t_player), info->map.nbr_ennemi);
-	printf("nbr_ennemi = %i\n", info->map.nbr_ennemi);
+	i->ennemi = calloc(sizeof(t_player), i->map.nbr_ennemi);
 }

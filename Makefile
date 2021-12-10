@@ -12,7 +12,8 @@ SRC = main.c \
 	fonction_aff.c \
 	fonction_utile.c \
 	test_maps.c \
-	map.c 
+	map.c \
+	affichage2.c
 
 OBJ = $(SRC:.c=.o)
 

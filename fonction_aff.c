@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 13:41:04 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/11/28 18:09:01 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2021/12/02 15:11:31 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ml_rect(t_info info, t_rect rect, int color)
 		while (++ybis < rect.m_y)
 			my_mlx_pixel_put(&info.st_img, rect.x, ybis, color);
 	}
-	mlx_put_image_to_window(info.mlx, info.mlx_win, info.st_img.img, 0, 0);
 	return ;
 }
 

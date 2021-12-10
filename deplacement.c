@@ -6,70 +6,93 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 17:04:14 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/11/28 18:04:06 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2021/12/08 16:08:32 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	move_down(t_info *info)
+int	move_down(t_info *i)
 {
-	int	y;
-	int	x;
-
-	y = info->player.y;
-	x = info->player.x;
-	ml_rect(*info, (t_rect){x, x + 64, y, y + 64}, 0x000000FF);
-	ml_rect(*info, (t_rect){x, x + 64, y - 64, y}, 0x00000000);
-	printf("infoplayer-- = %i\n", info->player.y);
-	info->player.y = y + 64;
-	printf("infoplayer++ = %i\n", info->player.y);
+	if (i->map.map_s[i->player.y + 1][i->player.x] == '1')
+		return (0);
+	else if (i->map.map_s[i->player.y + 1][i->player.x] == 'E'
+		&& i->map.coll == 0)
+		i->gg = 1;
+	else if (i->map.map_s[i->player.y + 1][i->player.x] == 'C')
+	{
+		i->map.coll--;
+		i->map.map_s[i->player.y + 1][i->player.x] = '0';
+	}
+	i->player.y += 1;
+	i->map.nb_m++;
+	verif_dead(i);
 	return (1);
 }
 
-int	move_up(t_info *info)
+int	move_up(t_info *i)
 {
-	int	y;
-	int	x;
-
-	y = info->player.y;
-	x = info->player.x;
-	ml_rect(*info, (t_rect){x, x + 64, y, y + 64}, 0x000000FF);
-	ml_rect(*info, (t_rect){x, x + 64, y + 64, y + 128}, 0x00000000);
-	info->player.y = y - 64;
+	if (i->map.map_s[i->player.y - 1][i->player.x] == '1')
+		return (0);
+	else if (i->map.map_s[i->player.y - 1][i->player.x] == 'E'
+		&& i->map.coll == 0)
+		i->gg = 1;
+	else if (i->map.map_s[i->player.y - 1][i->player.x] == 'C')
+	{
+		i->map.coll--;
+		i->map.map_s[i->player.y - 1][i->player.x] = '0';
+	}
+	i->player.y += -1;
+	i->map.nb_m++;
+	verif_dead(i);
 	return (1);
 }
 
-int	move_left(t_info *info)
+int	move_left(t_info *i)
 {
-	int	y;
-	int	x;
-
-	y = info->player.y;
-	x = info->player.x;
-	ml_rect(*info, (t_rect){x, x + 64, y, y + 64}, 0x000000FF);
-	ml_rect(*info, (t_rect){x, x + 64, y - 64, y}, 0x00000000);
-	info->player.y = y - 64;
+	if (i->map.map_s[i->player.y][i->player.x - 1] == '1')
+		return (0);
+	else if (i->map.map_s[i->player.y][i->player.x - 1] == 'E'
+		&& i->map.coll == 0)
+		i->gg = 1;
+	else if (i->map.map_s[i->player.y][i->player.x - 1] == 'C')
+	{
+		i->map.coll--;
+		i->map.map_s[i->player.y][i->player.x - 1] = '0';
+	}
+	i->player.x += -1;
+	i->map.nb_m++;
+	verif_dead(i);
 	return (1);
 }
 
-// int	move_right(t_info *info)
-// {
-// 	int	xdest;
-// 	int	y;
-// 	int	x;
+int	move_right(t_info *i)
+{
+	if (i->map.map_s[i->player.y][i->player.x + 1] == '1')
+		return (0);
+	else if (i->map.map_s[i->player.y][i->player.x + 1] == 'E'
+		&& i->map.coll == 0)
+		i->gg = 1;
+	else if (i->map.map_s[i->player.y][i->player.x + 1] == 'C')
+	{
+		i->map.coll--;
+		i->map.map_s[i->player.y][i->player.x + 1] = '0';
+	}
+	i->player.x += 1;
+	i->map.nb_m++;
+	verif_dead(i);
+	return (1);
+}
 
-// 	y = info->player.y;
-// 	x = info->player.x;
-// 	xdest = info->player.x;
-// 	while (x < xdest + 64)
-// 	{
-// 		ml_rect(*info, x, x + 64, y, y + 64, 0x000000FF);
-// 		ml_rect(*info, x, x - 1, y, y + 64, 0x00000000);
-// 		x++;
-// 	}
-// 	printf("infoplayer-- = %i\n", info->player.x);
-// 	info->player.x = x;
-// 	printf("infoplayer++ = %i\n", info->player.x);
-// 	return (1);
-// }
+void	verif_dead(t_info *i)
+{
+	int	n;
+
+	n = 0;
+	while (n <= i->map.nbr_ennemi)
+	{
+		if (i->player.x == i->ennemi[n].x && i->player.y == i->ennemi[n].y)
+			i->dead = 1;
+		n++;
+	}
+}

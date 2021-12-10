@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 19:17:49 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/11/30 18:57:08 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2021/12/08 16:09:48 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,90 +22,78 @@ int	m_test_rect(char *fichier, int comp)
 	while (--comp >= 1)
 	{
 		if (ft_strlen(get_next_line(fd)) != x)
-		{
-			printf("la map : %s n'est pas une map rectangulaire\n", fichier);
-			exit(1);
-		}
+			msg_exit("la map n'est pas une map rectangulaire");
 	}
 	close(fd);
 	return (x);
 }
 
-void	m_verif_cat(t_info *info, char *ligne, int comp, int fd)
+void	m_verif_cat(t_info *i, char *ligne, int comp, int fd)
 {
-	int	i;
+	int	j;
 
 	while (--comp >= 0)
 	{
 		ligne = get_next_line(fd);
-		i = -1;
-		while (ligne[++i])
+		j = -1;
+		while (ligne[++j])
 		{
-			if (ligne[i] == 'C')
-				info->map.collectible++;
-			else if (ligne[i] == 'P')
-				info->map.player++;
-			else if (ligne[i] == 'E')
-				info->map.exit++;
-			else if (ft_test(ligne[i], "01CPED") == 0)
+			if (ligne[j] == 'C')
+				i->map.coll++;
+			else if (ligne[j] == 'P')
+				i->map.player++;
+			else if (ligne[j] == 'E')
+				i->map.exit++;
+			else if (ft_test(ligne[j], "01CPED") == 0)
 			{
-				printf("Mauvais caractere sur la carte\n");
 				free(ligne);
-				exit(1);
+				msg_exit("Mauvais caractere sur la carte");
 			}
 		}
 	}
 	close(fd);
 }
 
-void	m_verif_pec(t_info info)
+void	m_verif_pec(t_info i)
 {
-	if (info.map.collectible < 1)
-	{
-		printf("pas assez de collectible\n");
-		exit(1);
-	}
-	if (info.map.exit < 1)
-	{
-		printf("pas assez d'exit\n");
-		exit(1);
-	}
-	if (info.map.player != 1)
-	{
-		printf("pas le bon nombre de player\n");
-		exit(1);
-	}
+	if (i.map.coll < 1)
+		msg_exit("pas assez de collectible");
+	if (i.map.exit < 1)
+		msg_exit("pas assez d'exit");
+	if (i.map.player != 1)
+		msg_exit("pas le bon nombre de player");
 }
 
-void	m_verif_map(t_info *info, char *fichier, int comp)
+void	m_verif_map(t_info *i, char *fichier, int comp)
 {
 	int		fd;
 	char	*ligne;
 
 	fd = ft_open(fichier);
-	ligne = calloc(1, info->map.map_width + 1);
-	m_verif_cat(info, ligne, comp, fd);
-	m_verif_pec(*info);
+	ligne = calloc(1, i->map.map_width + 1);
+	m_verif_cat(i, ligne, comp, fd);
+	m_verif_pec(*i);
 }
 
-void	m_ft_ferme(t_info info)
+void	m_ft_ferme(t_info *i)
 {
 	int	n;
-	int	i;
+	int	j;
 
 	n = -1;
-	while (++n < info.map.map_height)
+	while (++n < i->map.map_height)
 	{
-		if (info.map.map_s[n][0] != '1' || info.map.map_s[n][info.map.map_width - 1] != '1')
-			ft_del_maps(&info, "mauvaise bordure");
-		i = -1;
-		while (++i < info.map.map_width)
+		if (i->map.map_s[n][0] != '1'
+			|| i->map.map_s[n][i->map.map_width - 1] != '1')
+			ft_del_maps(i, "mauvaise bordure");
+		j = -1;
+		while (++j < i->map.map_width)
 		{
-			if (n == 0 && (info.map.map_s[n][i] != '1'))
-				ft_del_maps(&info, "ligne 1 pas que des 1");
-			else if (n == info.map.map_height - 1 && info.map.map_s[n][i] != '1')
-				ft_del_maps(&info, "derniere ligne pas que des 1");
-			m_init(&info, info.map.map_s[n][i], i, n);
+			if (n == 0 && (i->map.map_s[n][j] != '1'))
+				ft_del_maps(i, "ligne 1 pas que des 1");
+			else if (n == i->map.map_height - 1 && i->map.map_s[n][j] != '1')
+				ft_del_maps(i, "derniere ligne pas que des 1");
+			m_init(i, i->map.map_s[n][j], j, n);
 		}
 	}
 }
