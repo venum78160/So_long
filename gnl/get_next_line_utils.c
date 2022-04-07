@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 22:12:43 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/11/28 18:14:37 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:47:17 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,6 @@ char	*new_line_after(char *buffer)
 		ft_strlcpy(line, buffer, (ft_strlen_gnl(buffer) - newbuf));
 	else
 		ft_strlcpy(line, buffer, (ft_strlen_gnl(buffer) - newbuf) + 1);
+	free(buffer);
 	return (line);
 }

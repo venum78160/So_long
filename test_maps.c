@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 19:17:49 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/12/08 16:09:48 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:21:25 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,19 @@ int	m_test_rect(char *fichier, int comp)
 {
 	size_t	x;
 	int		fd;
+	char	*ret;
 
 	fd = ft_open(fichier);
-	x = ft_strlen(get_next_line(fd));
+	ret = get_next_line(fd);
+	x = ft_strlen(ret);
 	while (--comp >= 1)
 	{
-		if (ft_strlen(get_next_line(fd)) != x)
+		free (ret);
+		ret = get_next_line(fd);
+		if (ft_strlen(ret) != x)
 			msg_exit("la map n'est pas une map rectangulaire");
 	}
+	free(ret);
 	close(fd);
 	return (x);
 }
@@ -50,6 +55,7 @@ void	m_verif_cat(t_info *i, char *ligne, int comp, int fd)
 				msg_exit("Mauvais caractere sur la carte");
 			}
 		}
+		free(ligne);
 	}
 	close(fd);
 }
@@ -70,7 +76,7 @@ void	m_verif_map(t_info *i, char *fichier, int comp)
 	char	*ligne;
 
 	fd = ft_open(fichier);
-	ligne = calloc(1, i->map.map_width + 1);
+	ligne = NULL;
 	m_verif_cat(i, ligne, comp, fd);
 	m_verif_pec(*i);
 }

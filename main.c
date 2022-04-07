@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 18:34:07 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/12/10 16:51:00 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:55:24 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	main(int argc, char *argv[])
 	i.mlx_win = mlx_new_window(i.mlx, 700, 700, "Best Game");
 	i.st_img.img = mlx_new_image(i.mlx, 700, 700);
 	i.st_img.addr = mlx_get_data_addr(i.st_img.img,
-			&i.st_img.bits_per_pixel, &i.st_img.line_length, &i.st_img.endian);
+			&i.st_img.bppixel, &i.st_img.line_length, &i.st_img.endian);
 	make_struct(&i, argv[1]);
 	make_tab(&i);
 	mlx_key_hook(i.mlx_win, key_hook, &i);

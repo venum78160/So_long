@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 17:04:14 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/12/08 16:08:32 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2022/04/07 18:57:09 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	verif_dead(t_info *i)
 	int	n;
 
 	n = 0;
-	while (n <= i->map.nbr_ennemi)
+	while (n < i->map.nbr_ennemi)
 	{
 		if (i->player.x == i->ennemi[n].x && i->player.y == i->ennemi[n].y)
 			i->dead = 1;

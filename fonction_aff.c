@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 13:41:04 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/12/02 15:11:31 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:55:20 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,17 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *) dst = color;
+	if (x >= 0 && x < 700 && y >= 0 && y < 700)
+	{
+		dst = data->addr + (y * data->line_length + x * (data->bppixel / 8));
+		*(unsigned int *) dst = color;
+	}
 }
 
 unsigned int	get_mlx_pixel(t_data *data, int x, int y)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = data->addr + (y * data->line_length + x * (data->bppixel / 8));
 	return (*(unsigned int *) dst);
 }

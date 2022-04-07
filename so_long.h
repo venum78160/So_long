@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 11:26:08 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/12/10 16:49:50 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:55:08 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_player {
 typedef struct s_data {
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
+	int		bppixel;
 	int		line_length;
 	int		endian;
 }	t_data;

@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 18:55:57 by vl-hotel          #+#    #+#             */
-/*   Updated: 2021/12/08 14:45:28 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2022/04/07 19:52:28 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_open(char *fichier)
 	fd = open(fichier, O_RDONLY);
 	if (fd == -1)
 	{
-		printf("erreur d'ouverture\n");
+		ft_putstr_fd("erreur d'ouverture\n", 1);
 		exit(1);
 	}
 	return (fd);
@@ -72,6 +72,6 @@ void	m_init(t_info *info, char c, int x, int y)
 
 void	msg_exit(char *string)
 {
-	printf("%s\n", string);
+	ft_putstr_fd(string, 1);
 	exit(1);
 }
