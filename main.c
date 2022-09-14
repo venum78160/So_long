@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 18:34:07 by vl-hotel          #+#    #+#             */
-/*   Updated: 2022/04/07 19:55:24 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2022/04/11 16:57:08 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,7 @@ int	key_hook(int keycode, void *vars)
 	else if (keycode == 13 || keycode == 126)
 		move_up(i);
 	else if (keycode == 53)
-	{
-		mlx_destroy_window(i->mlx, i->mlx_win);
-		ft_del_maps (i, "exit");
-	}
+		ft_quit(i);
 	else if (keycode == 15)
 		i->dead = 1;
 	return (0);
@@ -104,6 +101,7 @@ int	main(int argc, char *argv[])
 	make_tab(&i);
 	mlx_key_hook(i.mlx_win, key_hook, &i);
 	mlx_loop_hook(i.mlx, render, &i);
+	mlx_hook(i.mlx_win, 17, 0L, ft_quit, &i);
 	mlx_loop(i.mlx);
 	return (0);
 }

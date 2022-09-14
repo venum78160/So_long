@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 11:26:08 by vl-hotel          #+#    #+#             */
-/*   Updated: 2022/04/07 19:55:08 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2022/04/11 16:54:44 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ void			sprite_grasstree(t_info *i, int x, int y);
 void			sprite_grass(t_info *i, int x, int y);
 void			rendercadre(t_info *i);
 void			display_mob(t_info *i, t_rect va);
+int				ft_quit(t_info *i);
 
 #endif

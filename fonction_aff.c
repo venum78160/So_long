@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 13:41:04 by vl-hotel          #+#    #+#             */
-/*   Updated: 2022/04/07 19:55:20 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2022/04/11 16:56:03 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,11 @@ unsigned int	get_mlx_pixel(t_data *data, int x, int y)
 
 	dst = data->addr + (y * data->line_length + x * (data->bppixel / 8));
 	return (*(unsigned int *) dst);
+}
+
+int	ft_quit(t_info *i)
+{
+	mlx_destroy_window(i->mlx, i->mlx_win);
+	ft_del_maps (i, "exit");
+	return (EXIT_SUCCESS);
 }

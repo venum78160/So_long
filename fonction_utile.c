@@ -6,7 +6,7 @@
 /*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 18:55:57 by vl-hotel          #+#    #+#             */
-/*   Updated: 2022/04/07 19:52:28 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2022/04/14 16:48:09 by vl-hotel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 int	ft_open(char *fichier)
 {
 	int	fd;
+	int	t;
 
-	fd = open(fichier, O_RDONLY);
+	fd = open(fichier, O_RDONLY, 0777);
 	if (fd == -1)
 	{
-		ft_putstr_fd("erreur d'ouverture\n", 1);
+		ft_putstr_fd("opening error\n", 1);
+		exit(1);
+	}
+	t = open(fichier, O_DIRECTORY, O_RDONLY);
+	if (t != -1)
+	{
+		ft_putstr_fd("it's a folder and not a file\n", 1);
 		exit(1);
 	}
 	return (fd);
