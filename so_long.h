@@ -15,7 +15,7 @@
 
 # include "Libft/libft.h"
 # include "gnl/get_next_line.h"
-# include <mlx.h>
+# include "minilibx/mlx.h"
 # include <stdio.h>
 # include <fcntl.h>
 
