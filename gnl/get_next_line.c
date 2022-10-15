@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhotellier <lhotellier@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 22:28:36 by vl-hotel          #+#    #+#             */
-/*   Updated: 2022/04/07 19:48:39 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:00:33 by lhotellier       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_add_buffer(int fd, char *buffer)
 	if (!add)
 		return (NULL);
 	tete = 1;
-	while (!ft_strchr(buffer, '\n') && tete != 0)
+	while (!ft_strchr_gnl(buffer, '\n') && tete != 0)
 	{
 		tete = read(fd, add, BUFFER_SIZE);
 		if (tete < 0)
@@ -86,14 +86,14 @@ char	*new_line(char *buffer)
 
 	if (buffer == NULL)
 		return (NULL);
-	if (ft_strchr(buffer, '\n') == NULL)
+	if (ft_strchr_gnl(buffer, '\n') == NULL)
 		newbuf = 0;
 	else
-		newbuf = ft_strlen_gnl(ft_strchr(buffer, '\n')) - 1;
+		newbuf = ft_strlen_gnl(ft_strchr_gnl(buffer, '\n')) - 1;
 	line = malloc(sizeof(char) * (ft_strlen_gnl(buffer) - newbuf) + 1);
 	if (!line)
 		return (NULL);
-	ft_strlcpy(line, buffer, (ft_strlen_gnl(buffer) - newbuf) + 1);
+	ft_strlcpy_gnl(line, buffer, (ft_strlen_gnl(buffer) - newbuf) + 1);
 	return (line);
 }
 
@@ -105,7 +105,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || fd > 255 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!buffer)
-		buffer = ft_strdup("");
+		buffer = ft_strdup_gnl("");
 	buffer = ft_add_buffer(fd, buffer);
 	if (!buffer)
 		return (NULL);

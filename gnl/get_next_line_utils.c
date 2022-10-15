@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhotellier <lhotellier@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 22:12:43 by vl-hotel          #+#    #+#             */
-/*   Updated: 2022/04/07 19:47:17 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:00:26 by lhotellier       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_strlen_gnl(const char *str)
 	return (i);
 }
 
-size_t	ft_strlcpy(char *dest, const char *src, unsigned int size)
+size_t	ft_strlcpy_gnl(char *dest, const char *src, unsigned int size)
 {
 	unsigned int	i;
 	size_t			len;
@@ -43,7 +43,7 @@ size_t	ft_strlcpy(char *dest, const char *src, unsigned int size)
 	return (len);
 }
 
-char	*ft_strdup(char *src)
+char	*ft_strdup_gnl(char *src)
 {
 	int		i;
 	int		taill;
@@ -65,7 +65,7 @@ char	*ft_strdup(char *src)
 	return (cpy);
 }
 
-char	*ft_strchr(const char	*string, int searchedChar)
+char	*ft_strchr_gnl(const char	*string, int searchedChar)
 {
 	int		i;
 	char	*str;
@@ -99,17 +99,17 @@ char	*new_line_after(char *buffer)
 
 	if (buffer == NULL)
 		return (NULL);
-	if (ft_strchr(buffer, '\n') == NULL)
+	if (ft_strchr_gnl(buffer, '\n') == NULL)
 		newbuf = 0;
 	else
-		newbuf = ft_strlen_gnl(ft_strchr(buffer, '\n')) - 1;
+		newbuf = ft_strlen_gnl(ft_strchr_gnl(buffer, '\n')) - 1;
 	line = malloc(sizeof(char) * (ft_strlen_gnl(buffer) - newbuf) + 1);
 	if (!line)
 		return (NULL);
-	if (ft_strchr(buffer, '\n') != NULL)
-		ft_strlcpy(line, buffer, (ft_strlen_gnl(buffer) - newbuf));
+	if (ft_strchr_gnl(buffer, '\n') != NULL)
+		ft_strlcpy_gnl(line, buffer, (ft_strlen_gnl(buffer) - newbuf));
 	else
-		ft_strlcpy(line, buffer, (ft_strlen_gnl(buffer) - newbuf) + 1);
+		ft_strlcpy_gnl(line, buffer, (ft_strlen_gnl(buffer) - newbuf) + 1);
 	free(buffer);
 	return (line);
 }

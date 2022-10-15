@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vl-hotel <vl-hotel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lhotellier <lhotellier@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 11:26:08 by vl-hotel          #+#    #+#             */
-/*   Updated: 2022/04/11 16:54:44 by vl-hotel         ###   ########.fr       */
+/*   Updated: 2022/10/15 15:27:15 by lhotellier       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "Libft/libft.h"
 # include "gnl/get_next_line.h"
 # include "minilibx/mlx.h"
+# include "minilibx/mlx_opengl.h"
+# include "minilibx/mlx_png.h"
 # include <stdio.h>
 # include <fcntl.h>
 
